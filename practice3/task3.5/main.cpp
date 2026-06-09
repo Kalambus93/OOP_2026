@@ -2,14 +2,20 @@
 
 using namespace std;
 
-int fact(int n) {
-	if (n > 1) return n * fact(n - 1);
-	else return 1;
+int fact(int n)
+{
+	if (n > 1)
+		return n * fact(n - 1);
+	else
+		return 1;
 }
 
-int main() {
+int main()
+{
+	std::println("Программа вычисляет факториал натурального числа");
 	int n = 0;
-	do {
+	do
+	{
 		println("Вычисление факториала числа. Введите число, принадлежащее расширенному множеству натуральных чисел::");
 		cin >> n;
 	} while (n < 0);

@@ -1,26 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char** argv) {
-    const char* name;
-    
-    if (argc > 1) {
+int main(int argc, char **argv)
+{
+    const char *name;
+
+    if (argc > 1)
+    {
         name = argv[1];
     }
-    else {
-        // Windows
+    else
+    {
         name = getenv("USERNAME");
-        
-        // Linux/macOS
-        if (name == NULL) {
-            name = getenv("USER");
-        }
-        
-        if (name == NULL) {
-            name = "мир";
+
+        if (name == NULL)
+        {
+            name = "world";
         }
     }
-    
-    printf("Привет, %s!\n", name);
+
+    printf("Hello, %s!\n", name);
     return 0;
 }

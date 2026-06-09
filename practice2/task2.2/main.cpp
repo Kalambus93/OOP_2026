@@ -2,12 +2,18 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
+	std::println("Программа определяет количество полных минут, прошедших с начала последнего часа");
 	int number = 0;
-	do {
+	do
+	{
 		println("Введите число от 0 до 86400");
 		cin >> number;
-		if (number > 86400) { println("Это число > 86400, это уже другие сутки"); }
+		if (number > 86400)
+		{
+			println("Это число > 86400, это уже другие сутки");
+		}
 	} while (number < 0 || number > 86400);
 
 	number = number % 3600;

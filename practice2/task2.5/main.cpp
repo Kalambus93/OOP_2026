@@ -2,14 +2,16 @@
 
 using namespace std;
 
-int main() {
-
+int main()
+{
+	std::println("Программа проверяет, может ли ладья за один ход перейти с одного поля шахматной доски на другое");
 	int x1 = 0;
 	int x2 = 0;
 	int y1 = 0;
 	int y2 = 0;
 
-	do {
+	do
+	{
 		println("Поочередно введите координаты x1, x2, y1, y2");
 		cin >> x1;
 		cin >> x2;

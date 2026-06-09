@@ -13,7 +13,7 @@ private:
 
 public:
     KeyValuePair() = default;
-    KeyValuePair(TKey key, TValue value) : _key(key), _value(value) {}
+    KeyValuePair(const TKey &key, const TValue &value) : _key(key), _value(value) {}
 
     const TKey &Key() const
     {
@@ -26,7 +26,7 @@ public:
     }
 };
 
-template <typename TKey, typename TValue, typename Hash = std::hash<TKey>, typename KeyEqual = std::equal_to<TKey>>
+export template <typename TKey, typename TValue, typename Hash = std::hash<TKey>, typename KeyEqual = std::equal_to<TKey>>
 class DictionaryIterator : public IEnumerator<KeyValuePair<TKey, TValue>>
 {
 private:
@@ -62,7 +62,7 @@ public:
     }
 };
 
-template <typename TKey, typename TValue, typename Hash = std::hash<TKey>, typename KeyEqual = std::equal_to<TKey>>
+export template <typename TKey, typename TValue, typename Hash = std::hash<TKey>, typename KeyEqual = std::equal_to<TKey>>
 class Dictionary : public ICollection<KeyValuePair<TKey, TValue>>
 {
 private:

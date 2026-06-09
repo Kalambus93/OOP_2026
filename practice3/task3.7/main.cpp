@@ -2,16 +2,22 @@
 
 using namespace std;
 
-int digit_sum (int n) {
-	if (n > 9) {
-		return n % 10 + digit_sum(n/10);
+int digit_sum(int n)
+{
+	if (n > 9)
+	{
+		return n % 10 + digit_sum(n / 10);
 	}
-	else return n;
+	else
+		return n;
 }
 
-int main() {
+int main()
+{
+	std::println("Программа находит сумму цифр числа без использования циклов");
 	int n = 0;
-	do {
+	do
+	{
 		println("Введите натуральное число:");
 		cin >> n;
 	} while (n < 0);
