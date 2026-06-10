@@ -80,7 +80,7 @@ public:
 		_numerator += _denominator;
 		normalize();
 		return *this;
-	} // Префиксный инкремент, т.е. мы сначала ++, потом присваиваем значение
+	}
 
 	Fraction operator++(int)
 	{
@@ -88,7 +88,7 @@ public:
 		_numerator += _denominator;
 		normalize();
 		return fr;
-	} // Постфиксный инкремент, т.е. мы сначала сохраняем значение в новую переменную, потом ++, потом возвращаем переменную (не возвращает ссылку)
+	}
 };
 
 Fraction operator+(Fraction fr1, Fraction fr2)

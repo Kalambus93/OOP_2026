@@ -30,7 +30,7 @@ public:
     T Current() const override
     {
         if (!_started || _current == _end)
-            throw std::runtime_error("Invalid state");
+            throw std::runtime_error("Invalid iterator state");
         return *_current;
     }
 };
@@ -56,7 +56,7 @@ public:
     {
         if (_queue.empty())
         {
-            throw std::logic_error("Очередь пуста");
+            throw std::logic_error("The queue is empty");
         }
         T first_item = _queue.front();
         _queue.pop_front();
@@ -67,7 +67,7 @@ public:
     {
         if (_queue.empty())
         {
-            throw std::logic_error("Очередь пуста");
+            throw std::logic_error("The queue is empty");
         }
         return _queue.front();
     }

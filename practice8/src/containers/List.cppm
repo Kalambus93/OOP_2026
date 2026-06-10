@@ -37,7 +37,7 @@ public:
         }
         else
         {
-            throw std::runtime_error("Недопустимое состояние итератора");
+            throw std::runtime_error("Invalid iterator state");
         }
     }
 };
@@ -97,7 +97,7 @@ public:
     {
         if (index < 0 || index >= static_cast<int>(_list.size()))
         {
-            throw std::out_of_range("Неправильный индекс");
+            throw std::out_of_range("Incorrect index");
         }
         else
         {
@@ -109,7 +109,7 @@ public:
     {
         if (index < 0 || index > static_cast<int>(_list.size()))
         {
-            throw std::out_of_range("Неправильный индекс");
+            throw std::out_of_range("Incorrect index");
         }
         else
         {
@@ -121,7 +121,7 @@ public:
     {
         if (index < 0 || index >= static_cast<int>(_list.size()))
         {
-            throw std::out_of_range("Неправильный индекс");
+            throw std::out_of_range("Incorrect index");
         }
         _list.erase(_list.begin() + index);
     }

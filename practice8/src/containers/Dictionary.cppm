@@ -57,7 +57,7 @@ public:
         }
         else
         {
-            throw std::runtime_error("Недопустимое состояние итератора");
+            throw std::runtime_error("Invalid iterator state");
         }
     }
 };
@@ -82,7 +82,7 @@ public:
 
         if (add_item.second == false)
         {
-            throw std::runtime_error("Такой ключ уже есть");
+            throw std::runtime_error("There is already such a key");
         }
     }
 
@@ -102,7 +102,7 @@ public:
     {
         if (_map.find(item.Key()) == _map.end())
         {
-            throw std::logic_error("Ключ не найден");
+            throw std::logic_error("The key was not found");
         }
         else
         {

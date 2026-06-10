@@ -34,7 +34,7 @@ public:
         }
         else
         {
-            throw std::runtime_error("Недопустимое состояние итератора");
+            throw std::runtime_error("Invalid iterator state");
         }
     }
 };

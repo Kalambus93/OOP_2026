@@ -30,7 +30,7 @@ public:
     T Current() const override
     {
         if (!_started || _current == _end)
-            throw std::runtime_error("Недопустимое состояние итератора");
+            throw std::runtime_error("Invalid iterator state");
         return *_current;
     }
 };
@@ -56,7 +56,7 @@ public:
     {
         if (_stack.empty())
         {
-            throw std::logic_error("Стек пустой");
+            throw std::logic_error("The stack is empty");
         }
         return _stack.back();
     }
@@ -65,7 +65,7 @@ public:
     {
         if (_stack.empty())
         {
-            throw std::logic_error("Стек пустой");
+            throw std::logic_error("The stack is empty");
         }
         T pop_item = _stack.back();
         _stack.pop_back();
