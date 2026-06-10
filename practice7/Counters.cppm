@@ -2,10 +2,12 @@
 
 import std;
 
-export class ICounter {
+export class ICounter
+{
 protected:
 	int _count = 0;
 	int _max = 0;
+
 public:
 	virtual ~ICounter() = default;
 
@@ -16,119 +18,150 @@ public:
 	virtual std::string getType() const = 0;
 };
 
-export class BoundedCounter : ICounter {
+export class BoundedCounter : public ICounter
+{
 private:
 public:
-
-	BoundedCounter(int max) {
+	BoundedCounter(int max)
+	{
 		_max = max;
 	}
 
-	void increment() override {
-		if (_count < _max) {
+	void increment() override
+	{
+		if (_count < _max)
+		{
 			++_count;
 		}
 	}
 
-	void reset() override {
+	void reset() override
+	{
 		_count = 0;
 	}
 
-	int getValue() const override {
+	int getValue() const override
+	{
 		return _count;
 	}
 
-	bool IsLimitReached() const override{
+	bool IsLimitReached() const override
+	{
 
-		if (_count == _max) {
+		if (_count == _max)
+		{
 			return true;
 		}
 
-		else {
+		else
+		{
 			return false;
 		}
 	}
 
-	std::string getType() const override {
-		return std::format("Тип: BoundedCounter, Параметры: max = {}", _max);
+	std::string getType() const override
+	{
+		return std::format("Type: BoundedCounter, Parameters: max = {}", _max);
 	}
 };
 
-export class CyclicCounter : ICounter {
+export class CyclicCounter : public ICounter
+{
 private:
 public:
-	CyclicCounter(int max) {
+	CyclicCounter(int max)
+	{
 		_max = max;
 	}
 
-	void increment() override {
-		if (_count < _max) {
+	void increment() override
+	{
+		if (_count < _max)
+		{
 			++_count;
 		}
 
-		else {
+		else
+		{
 			_count = 0;
 		}
 	}
 
-	void reset() override {
+	void reset() override
+	{
 		_count = 0;
 	}
 
-	int getValue() const override {
+	int getValue() const override
+	{
 		return _count;
 	}
 
-	bool IsLimitReached() const override{
+	bool IsLimitReached() const override
+	{
 
-		if (_count == _max) {
+		if (_count == _max)
+		{
 			return true;
 		}
 
-		else {
+		else
+		{
 			return false;
 		}
 	}
 
-		std::string getType() const override {
-		return std::format("Тип: CyclicCounter, Параметры: max = {}", _max);
+	std::string getType() const override
+	{
+		return std::format("Type: CyclicCounter, Parameters: max = {}", _max);
 	}
 };
 
-export class StepCounter : ICounter {
+export class StepCounter : public ICounter
+{
 private:
 	int _step = 0;
+
 public:
-	StepCounter(int max, int step): _step(step) {
+	StepCounter(int max, int step) : _step(step)
+	{
 		_max = max;
 	}
 
-	void increment() override {
-		if (_count+_step <= _max) {
+	void increment() override
+	{
+		if (_count + _step <= _max)
+		{
 			_count += _step;
 		}
 	}
 
-	void reset() override {
+	void reset() override
+	{
 		_count = 0;
 	}
 
-	int getValue() const override {
+	int getValue() const override
+	{
 		return _count;
 	}
 
-	bool IsLimitReached() const override{
+	bool IsLimitReached() const override
+	{
 
-		if (_count == _max || _count + _step > _max) {
+		if (_count == _max || _count + _step > _max)
+		{
 			return true;
 		}
 
-		else {
+		else
+		{
 			return false;
 		}
 	}
 
-		std::string getType() const override {
-		return std::format("Тип: StepCounter, Параметры: max = {}, step = {}", _max, _step);
+	std::string getType() const override
+	{
+		return std::format("Type: StepCounter, Parameters: max = {}, step = {}", _max, _step);
 	}
 };
