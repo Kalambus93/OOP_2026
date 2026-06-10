@@ -38,7 +38,7 @@ export int FindMember(const std::vector<SquareSequence> &vec_for_member_sequence
 		if (temporary_variable > vec_for_member_sequence[i](n))
 		{
 			temporary_variable = vec_for_member_sequence[i](n);
-			index = i;
+			index = static_cast<int>(i);
 		}
 	}
 
