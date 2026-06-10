@@ -2,23 +2,26 @@
 
 using namespace std;
 
-class Fraction {
+class Fraction
+{
 private:
 	int _numerator = 0;
 	int _denominator = 0;
+
 public:
-	Fraction(int numerator) {
+	Fraction(int numerator)
+	{
 		_numerator = numerator;
 	}
-	Fraction(int numerator, int denominator) {
+	Fraction(int numerator, int denominator)
+	{
 		_numerator = numerator;
 		_denominator = denominator;
 	}
-
-
 };
 
-int main() {
-	
+int main()
+{
+
 	return 0;
 }
