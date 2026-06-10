@@ -21,5 +21,5 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8 /W4")
 endif()
 
-add_subdirectory("practice")
+add_subdirectory("practices")
 add_subdirectory("labs")

@@ -14,7 +14,7 @@ int main()
                  "-----------------------------------");
 
     std::println("Название: Twenty Thousand Leagues under the Sea by Jules Verne");
-    std::vector<std::string> main_vector_lines = DownloadText("../../../lab5/text.txt");
+    std::vector<std::string> main_vector_lines = DownloadText("../../../../labs/lab5/text.txt");
     main_vector_lines = Normalize(main_vector_lines);
     std::println("\nКоличество слов в тексте: {} слов", main_vector_lines.size());
 
