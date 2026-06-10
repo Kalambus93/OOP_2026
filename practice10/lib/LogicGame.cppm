@@ -62,7 +62,6 @@ export void HandleClick(GameSession &session, const auto &MouseClick, const std:
         if (session.state == GameState::Start)
         {
             session.state = GameState::Playing;
-            std::println("LBM_Playing");
         }
 
         else if (session.state == GameState::Playing)
@@ -99,7 +98,6 @@ export void HandleClick(GameSession &session, const auto &MouseClick, const std:
         else
         {
             session.state = GameState::Playing;
-            std::println("LBM_Result");
         }
     }
 }

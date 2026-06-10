@@ -26,10 +26,11 @@ int main()
     sf::Sprite make_a_move = CreateSprite(tStatus, {0, 816}, {FRAME, 200});
 
     player.insert_or_assign("rock", CreateSprite(tMoves, {0, FRAME}, {FRAME, FRAME}));
-    pc.insert_or_assign("rock", CreateSprite(tMoves, {0, 0}, {FRAME, FRAME}));
     player.insert_or_assign("paper", CreateSprite(tMoves, {FRAME, FRAME}, {FRAME, FRAME}));
-    pc.insert_or_assign("paper", CreateSprite(tMoves, {FRAME, 0}, {FRAME, FRAME}));
     player.insert_or_assign("scissors", CreateSprite(tMoves, {2 * FRAME, FRAME}, {FRAME, FRAME}));
+
+    pc.insert_or_assign("rock", CreateSprite(tMoves, {0, 0}, {FRAME, FRAME}));
+    pc.insert_or_assign("paper", CreateSprite(tMoves, {FRAME, 0}, {FRAME, FRAME}));
     pc.insert_or_assign("scissors", CreateSprite(tMoves, {2 * FRAME, 0}, {FRAME, FRAME}));
 
     status.insert_or_assign("win", CreateSprite(tStatus, {0, 0}, {FRAME, 256}));
