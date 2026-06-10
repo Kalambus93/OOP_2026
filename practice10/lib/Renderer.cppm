@@ -55,14 +55,13 @@ public:
     }
 };
 
-void drawButton(sf::RenderWindow &window, sf::Sprite &sprite, sf::Vector2f scale, sf::Vector2f position)
+void drawButton(sf::RenderWindow &window, sf::Sprite &sprite, const sf::Vector2f &scale, const sf::Vector2f &position)
 {
     sprite.setScale(scale);
     sprite.setPosition(position);
     window.draw(sprite);
 }
 
-// Сделайте параметр константным, это хорошая практика
 export void renderGame(sf::RenderWindow &window, const GameSession &session, Sprites &all_sprites)
 {
     if (session.state == GameState::Start)
@@ -80,7 +79,6 @@ export void renderGame(sf::RenderWindow &window, const GameSession &session, Spr
     }
     else if (session.state == GameState::Result)
     {
-        // Используем switch для чистоты кода (как мы договаривались)
         switch (session.human_move)
         {
         case Moves::Rock:
@@ -111,7 +109,6 @@ export void renderGame(sf::RenderWindow &window, const GameSession &session, Spr
             break;
         }
 
-        // Используем drawButton и для статуса для единообразия
         switch (session.result)
         {
         case 0:
