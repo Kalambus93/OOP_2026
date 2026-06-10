@@ -62,16 +62,14 @@ void drawButton(sf::RenderWindow &window, sf::Sprite &sprite, sf::Vector2f scale
     window.draw(sprite);
 }
 
-export void renderGame(sf::RenderWindow &window, const GameState &state, Sprites &all_sprites,
-                       Moves human_move, Moves pc_move, int result)
+// Сделайте параметр константным, это хорошая практика
+export void renderGame(sf::RenderWindow &window, const GameSession &session, Sprites &all_sprites)
 {
-
-    if (state == GameState::Start)
+    if (session.state == GameState::Start)
     {
         window.draw(all_sprites.getStartSprite());
     }
-
-    else if (state == GameState::Playing)
+    else if (session.state == GameState::Playing)
     {
         all_sprites.getMakeAMoveSprite().setPosition({30.0f, 0.0f});
         window.draw(all_sprites.getMakeAMoveSprite());
@@ -80,49 +78,50 @@ export void renderGame(sf::RenderWindow &window, const GameState &state, Sprites
         drawButton(window, all_sprites.getPlayerSprites().at("paper"), {0.3f, 0.3f}, {350.0f, 400.0f});
         drawButton(window, all_sprites.getPlayerSprites().at("scissors"), {0.3f, 0.3f}, {690.0f, 400.0f});
     }
-
-    else if (state == GameState::Result)
+    else if (session.state == GameState::Result)
     {
-
-        if (human_move == Moves::Rock)
+        // Используем switch для чистоты кода (как мы договаривались)
+        switch (session.human_move)
         {
+        case Moves::Rock:
             drawButton(window, all_sprites.getPlayerSprites().at("rock"), {0.4f, 0.4f}, {150.0f, 300.0f});
-        }
-        else if (human_move == Moves::Paper)
-        {
+            break;
+        case Moves::Paper:
             drawButton(window, all_sprites.getPlayerSprites().at("paper"), {0.4f, 0.4f}, {150.0f, 300.0f});
-        }
-        else if (human_move == Moves::Scissors)
-        {
+            break;
+        case Moves::Scissors:
             drawButton(window, all_sprites.getPlayerSprites().at("scissors"), {0.4f, 0.4f}, {150.0f, 300.0f});
+            break;
+        default:
+            break;
         }
 
-        if (pc_move == Moves::Rock)
+        switch (session.pc_move)
         {
+        case Moves::Rock:
             drawButton(window, all_sprites.getPcSprites().at("rock"), {0.4f, 0.4f}, {550.0f, 300.0f});
-        }
-        else if (pc_move == Moves::Paper)
-        {
+            break;
+        case Moves::Paper:
             drawButton(window, all_sprites.getPcSprites().at("paper"), {0.4f, 0.4f}, {550.0f, 300.0f});
-        }
-        else if (pc_move == Moves::Scissors)
-        {
+            break;
+        case Moves::Scissors:
             drawButton(window, all_sprites.getPcSprites().at("scissors"), {0.4f, 0.4f}, {550.0f, 300.0f});
+            break;
+        default:
+            break;
         }
 
-        switch (result)
+        // Используем drawButton и для статуса для единообразия
+        switch (session.result)
         {
         case 0:
-            all_sprites.getStatusSprites().at("draw").setPosition({0.0f, 0.0f});
-            window.draw(all_sprites.getStatusSprites().at("draw"));
+            drawButton(window, all_sprites.getStatusSprites().at("draw"), {1.0f, 1.0f}, {0.0f, 0.0f});
             break;
         case 1:
-            all_sprites.getStatusSprites().at("win").setPosition({0.0f, 0.0f});
-            window.draw(all_sprites.getStatusSprites().at("win"));
+            drawButton(window, all_sprites.getStatusSprites().at("win"), {1.0f, 1.0f}, {0.0f, 0.0f});
             break;
         case 2:
-            all_sprites.getStatusSprites().at("lose").setPosition({0.0f, 0.0f});
-            window.draw(all_sprites.getStatusSprites().at("lose"));
+            drawButton(window, all_sprites.getStatusSprites().at("lose"), {1.0f, 1.0f}, {0.0f, 0.0f});
             break;
         }
     }

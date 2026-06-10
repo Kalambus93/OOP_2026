@@ -38,13 +38,7 @@ int main()
 
     Sprites all_sprites(player, pc, status, start, make_a_move);
 
-    GameState state = GameState::Start;
-    Moves human_move = Moves::None;
-    Moves pc_move = Moves::None;
-    int result = -1;
-
-    std::random_device seed;
-    std::mt19937 generator(seed());
+    GameSession session;
 
     while (window.isOpen())
     {
@@ -64,14 +58,14 @@ int main()
 
                 if (MouseClick && MouseClick->button == sf::Mouse::Button::Left)
                 {
-                    HandleClick(state, MouseClick, human_move, pc_move, generator, result, player);
+                    HandleClick(session, MouseClick, all_sprites.getPlayerSprites());
                 }
             }
         }
 
         window.clear(sf::Color::White);
 
-        renderGame(window, state, all_sprites, human_move, pc_move, result);
+        renderGame(window, session, all_sprites);
 
         window.display();
     }

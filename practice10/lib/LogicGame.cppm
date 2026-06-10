@@ -20,6 +20,17 @@ export enum class GameState {
     Result
 };
 
+export struct GameSession
+{
+    GameState state = GameState::Start;
+    Moves human_move = Moves::None;
+    Moves pc_move = Moves::None;
+    int result = -1;
+    std::mt19937 generator;
+
+    GameSession() : generator(std::random_device{}()) {}
+};
+
 export Moves processRound(int &result, const Moves &human, std::mt19937 &gen)
 {
     std::uniform_int_distribution<> dis(1, 3);
@@ -29,12 +40,14 @@ export Moves processRound(int &result, const Moves &human, std::mt19937 &gen)
     {
         result = 0;
     }
+
     else if ((human == Moves::Rock && pc == Moves::Scissors) ||
              (human == Moves::Paper && pc == Moves::Rock) ||
              (human == Moves::Scissors && pc == Moves::Paper))
     {
         result = 1;
     }
+
     else
     {
         result = 2;
@@ -43,44 +56,50 @@ export Moves processRound(int &result, const Moves &human, std::mt19937 &gen)
     return pc;
 }
 
-Moves getClickedMove(const sf::Vector2i &clickPos, const std::unordered_map<std::string, sf::Sprite> &player)
+export void HandleClick(GameSession &session, const auto &MouseClick, const std::unordered_map<std::string, sf::Sprite> &playerSprites)
 {
-    sf::Vector2f posF(static_cast<float>(clickPos.x), static_cast<float>(clickPos.y));
-
-    if (player.at("rock").getGlobalBounds().contains(posF))
-        return Moves::Rock;
-    if (player.at("paper").getGlobalBounds().contains(posF))
-        return Moves::Paper;
-    if (player.at("scissors").getGlobalBounds().contains(posF))
-        return Moves::Scissors;
-
-    return Moves::None;
-}
-
-export void HandleClick(GameState &state, const auto &MouseClick,
-                        Moves &human_move, Moves &pc_move,
-                        std::mt19937 &generator, int &result,
-                        const std::unordered_map<std::string, sf::Sprite> &player)
-{
-
-    if (state == GameState::Start || state == GameState::Result)
     {
-        state = GameState::Playing;
-        human_move = Moves::None;
-        std::println("LBM_Playing");
-        return;
-    }
-
-    if (state == GameState::Playing)
-    {
-        sf::Vector2i clickPos = MouseClick->position;
-        Moves clicked = getClickedMove(clickPos, player);
-
-        if (clicked != Moves::None)
+        if (session.state == GameState::Start)
         {
-            human_move = clicked;
-            pc_move = processRound(result, human_move, generator);
-            state = GameState::Result;
+            session.state = GameState::Playing;
+            std::println("LBM_Playing");
+        }
+
+        else if (session.state == GameState::Playing)
+        {
+            sf::Vector2i clickPos = MouseClick->position;
+
+            if (playerSprites.at("rock").getGlobalBounds().contains(static_cast<sf::Vector2f>(clickPos)))
+            {
+                std::println("Clicked on ROCK!");
+                session.human_move = Moves::Rock;
+            }
+
+            else if (playerSprites.at("paper").getGlobalBounds().contains(static_cast<sf::Vector2f>(clickPos)))
+            {
+                std::println("Clicked on PAPER!");
+                session.human_move = Moves::Paper;
+            }
+
+            else if (playerSprites.at("scissors").getGlobalBounds().contains(static_cast<sf::Vector2f>(clickPos)))
+            {
+                std::println("Clicked on SCISSORS!");
+                session.human_move = Moves::Scissors;
+            }
+
+            if (session.human_move != Moves::None)
+            {
+
+                session.pc_move = processRound(session.result, session.human_move, session.generator);
+
+                session.state = GameState::Result;
+            }
+        }
+
+        else
+        {
+            session.state = GameState::Playing;
+            std::println("LBM_Result");
         }
     }
 }
