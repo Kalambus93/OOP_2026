@@ -8,78 +8,121 @@ import std;
 import Assets;
 import LogicGame;
 
-void drawButton(sf::RenderWindow& window, sf::Sprite& sprite, float x, float y) {
-    sprite.setScale({ 0.3f, 0.3f });
-    sprite.setPosition({ x, y });
+export class Sprites
+{
+private:
+    std::unordered_map<std::string, sf::Sprite> _player;
+    std::unordered_map<std::string, sf::Sprite> _pc;
+    std::unordered_map<std::string, sf::Sprite> _status;
+    sf::Sprite _start;
+    sf::Sprite _make_a_move;
+
+public:
+    Sprites(std::unordered_map<std::string, sf::Sprite> player,
+            std::unordered_map<std::string, sf::Sprite> pc,
+            std::unordered_map<std::string, sf::Sprite> status,
+            sf::Sprite start,
+            sf::Sprite make_a_move)
+        : _player(std::move(player)),
+          _pc(std::move(pc)),
+          _status(std::move(status)),
+          _start(std::move(start)),
+          _make_a_move(std::move(make_a_move)) {}
+
+    std::unordered_map<std::string, sf::Sprite> &getPlayerSprites()
+    {
+        return _player;
+    }
+
+    std::unordered_map<std::string, sf::Sprite> &getPcSprites()
+    {
+        return _pc;
+    }
+
+    std::unordered_map<std::string, sf::Sprite> &getStatusSprites()
+    {
+        return _status;
+    }
+
+    sf::Sprite &getStartSprite()
+    {
+        return _start;
+    }
+
+    sf::Sprite &getMakeAMoveSprite()
+    {
+        return _make_a_move;
+    }
+};
+
+void drawButton(sf::RenderWindow &window, sf::Sprite &sprite, sf::Vector2f scale, sf::Vector2f position)
+{
+    sprite.setScale(scale);
+    sprite.setPosition(position);
     window.draw(sprite);
 }
 
-export void renderGame(sf::RenderWindow& window, const GameState& state,
-    std::unordered_map<std::string, sf::Sprite>& player,
-    std::unordered_map<std::string, sf::Sprite>& pc,
-    std::unordered_map<std::string, sf::Sprite>& status,
-    const sf::Sprite& start, sf::Sprite& make_a_move,
-    Moves human_move, Moves pc_move, int result) {
+export void renderGame(sf::RenderWindow &window, const GameState &state, Sprites &all_sprites,
+                       Moves human_move, Moves pc_move, int result)
+{
 
-    if (state == GameState::Start) {
-        window.draw(start);
+    if (state == GameState::Start)
+    {
+        window.draw(all_sprites.getStartSprite());
     }
 
-    else if (state == GameState::Playing) {
-        make_a_move.setPosition({ 30.0f, 0.0f });
-        window.draw(make_a_move);
+    else if (state == GameState::Playing)
+    {
+        all_sprites.getMakeAMoveSprite().setPosition({30.0f, 0.0f});
+        window.draw(all_sprites.getMakeAMoveSprite());
 
-        drawButton(window ,player.at("rock"), 10.0f, 400.0f);
-        drawButton(window, player.at("paper"), 350.0f, 400.0f);
-        drawButton(window, player.at("scissors"), 690.0f, 400.0f);
+        drawButton(window, all_sprites.getPlayerSprites().at("rock"), {0.3f, 0.3f}, {10.0f, 400.0f});
+        drawButton(window, all_sprites.getPlayerSprites().at("paper"), {0.3f, 0.3f}, {350.0f, 400.0f});
+        drawButton(window, all_sprites.getPlayerSprites().at("scissors"), {0.3f, 0.3f}, {690.0f, 400.0f});
     }
 
-    else if (state == GameState::Result) {
+    else if (state == GameState::Result)
+    {
 
-        if (human_move == Moves::Rock) {
-            player.at("rock").setScale({ 0.4f, 0.4f });
-            player.at("rock").setPosition({ 150.0f, 300.0f });
-            window.draw(player.at("rock"));
+        if (human_move == Moves::Rock)
+        {
+            drawButton(window, all_sprites.getPlayerSprites().at("rock"), {0.4f, 0.4f}, {150.0f, 300.0f});
         }
-        else if (human_move == Moves::Paper) {
-            player.at("paper").setScale({ 0.4f, 0.4f });
-            player.at("paper").setPosition({ 150.0f, 300.0f });
-            window.draw(player.at("paper"));
+        else if (human_move == Moves::Paper)
+        {
+            drawButton(window, all_sprites.getPlayerSprites().at("paper"), {0.4f, 0.4f}, {150.0f, 300.0f});
         }
-        else if (human_move == Moves::Scissors) {
-            player.at("scissors").setScale({ 0.4f, 0.4f });
-            player.at("scissors").setPosition({ 150.0f, 300.0f });
-            window.draw(player.at("scissors"));
+        else if (human_move == Moves::Scissors)
+        {
+            drawButton(window, all_sprites.getPlayerSprites().at("scissors"), {0.4f, 0.4f}, {150.0f, 300.0f});
         }
 
-        if (pc_move == Moves::Rock) {
-            pc.at("rock").setScale({ 0.4f, 0.4f });
-            pc.at("rock").setPosition({ 550.0f, 300.0f });
-            window.draw(pc.at("rock"));
+        if (pc_move == Moves::Rock)
+        {
+            drawButton(window, all_sprites.getPcSprites().at("rock"), {0.4f, 0.4f}, {550.0f, 300.0f});
         }
-        else if (pc_move == Moves::Paper) {
-            pc.at("paper").setScale({ 0.4f, 0.4f });
-            pc.at("paper").setPosition({ 550.0f, 300.0f });
-            window.draw(pc.at("paper"));
+        else if (pc_move == Moves::Paper)
+        {
+            drawButton(window, all_sprites.getPcSprites().at("paper"), {0.4f, 0.4f}, {550.0f, 300.0f});
         }
-        else if (pc_move == Moves::Scissors) {
-            pc.at("scissors").setScale({ 0.4f, 0.4f });
-            pc.at("scissors").setPosition({ 550.0f, 300.0f });
-            window.draw(pc.at("scissors"));
+        else if (pc_move == Moves::Scissors)
+        {
+            drawButton(window, all_sprites.getPcSprites().at("scissors"), {0.4f, 0.4f}, {550.0f, 300.0f});
         }
 
-        switch (result) {
+        switch (result)
+        {
         case 0:
-            status.at("draw").setPosition({ 0.0f, 0.0f });
-            window.draw(status.at("draw"));
+            all_sprites.getStatusSprites().at("draw").setPosition({0.0f, 0.0f});
+            window.draw(all_sprites.getStatusSprites().at("draw"));
             break;
         case 1:
-            status.at("win").setPosition({ 0.0f, 0.0f });
-            window.draw(status.at("win"));
+            all_sprites.getStatusSprites().at("win").setPosition({0.0f, 0.0f});
+            window.draw(all_sprites.getStatusSprites().at("win"));
             break;
         case 2:
-            status.at("lose").setPosition({ 0.0f, 0.0f });
-            window.draw(status.at("lose"));
+            all_sprites.getStatusSprites().at("lose").setPosition({0.0f, 0.0f});
+            window.draw(all_sprites.getStatusSprites().at("lose"));
             break;
         }
     }
