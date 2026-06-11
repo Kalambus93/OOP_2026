@@ -24,10 +24,9 @@ bool is_prime(int n)
 int main()
 {
 	std::println("Программа проверяет, является ли число простым");
-	bool n = 0;
+	int n = 0;
 	println("Введите n для проверки простоты числа");
 	cin >> n;
-	n = is_prime(n);
-	println("Число простое? {}", n);
+	println("Число простое? {}", is_prime(n));
 	return 0;
 }

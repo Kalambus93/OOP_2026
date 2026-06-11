@@ -24,6 +24,6 @@ int main()
 	} while (n < 0 || m < 0);
 
 	int a = gcd(n, m);
-	println("{}", a);
+	println("НОД: {}", a);
 	return 0;
 }
