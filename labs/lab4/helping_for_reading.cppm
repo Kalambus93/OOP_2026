@@ -4,7 +4,7 @@ import std;
 import delete_error;
 import sequence;
 
-export void IndexForAccess(int& index, const std::vector<std::shared_ptr<Sequence>>& sqnc)
+export void Index(int &index, const std::vector<std::shared_ptr<Sequence>> &sqnc)
 {
 	do
 	{
@@ -17,13 +17,14 @@ export void IndexForAccess(int& index, const std::vector<std::shared_ptr<Sequenc
 		if ((index < 0) || index >= static_cast<int>(sqnc.size()))
 		{
 			std::println("По правилам здравого смысла:\n"
-				"1. Нельзя выбрать отрицательный индекс\n"
-				"2. Индекс должен быть меньше размера массива (0-{})", std::to_string(sqnc.size() - 1));
+						 "1. Нельзя выбрать отрицательный индекс\n"
+						 "2. Индекс должен быть меньше размера массива (0-{})",
+						 std::to_string(sqnc.size() - 1));
 		}
 	} while ((index < 0) || index >= static_cast<int>(sqnc.size()));
 }
 
-export void Index(int& index, const std::vector<std::shared_ptr<Sequence>>& sqnc)
+export void IndexForInsert(int &index, const std::vector<std::shared_ptr<Sequence>> &sqnc)
 {
 	do
 	{
@@ -36,13 +37,14 @@ export void Index(int& index, const std::vector<std::shared_ptr<Sequence>>& sqnc
 		if ((index < 0) || index > static_cast<int>(sqnc.size()))
 		{
 			std::println("По правилам здравого смысла:\n"
-				"1. Нельзя выбрать отрицательный индекс\n"
-				"2. Индекс вставки должен быть от 0 до {}", std::to_string(sqnc.size()));
+						 "1. Нельзя выбрать отрицательный индекс\n"
+						 "2. Индекс вставки должен быть от 0 до {}",
+						 std::to_string(sqnc.size()));
 		}
 	} while ((index < 0) || index > static_cast<int>(sqnc.size()));
 }
 
-export void Type(int& type)
+export void Type(int &type)
 {
 	do
 	{
@@ -50,7 +52,7 @@ export void Type(int& type)
 		{
 			std::println("\nВведите тип объекта");
 			std::println("1. Квадратный многочлен\n"
-				"2. Факториал");
+						 "2. Факториал");
 			std::cin >> type;
 		} while (!FailHandling());
 
@@ -61,7 +63,7 @@ export void Type(int& type)
 	} while (type != 1 && type != 2);
 }
 
-export void Ratio(int& c)
+export void Ratio(int &c)
 {
 	do
 	{
@@ -70,7 +72,7 @@ export void Ratio(int& c)
 	} while (!FailHandling());
 }
 
-export void NaturalNumber(int& n)
+export void NaturalNumber(int &n)
 {
 	do
 	{
@@ -87,7 +89,7 @@ export void NaturalNumber(int& n)
 	} while (n <= 0);
 }
 
-export void ContainerPrint(const std::vector<std::shared_ptr<Sequence>>& sqnc)
+export void ContainerPrint(const std::vector<std::shared_ptr<Sequence>> &sqnc)
 {
 	std::print("Квадратные многочлены:[");
 	for (std::size_t i = 0; i < sqnc.size(); ++i)
