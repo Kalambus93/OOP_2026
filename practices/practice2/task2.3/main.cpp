@@ -17,7 +17,7 @@ int main()
 
 	int day = (k + n - 2) % 7 + 1;
 
-	println("{}", day);
+	println("{} день недели", day);
 
 	return 0;
 }

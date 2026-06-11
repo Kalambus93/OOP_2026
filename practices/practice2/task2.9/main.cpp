@@ -7,6 +7,7 @@ int main()
     std::println("Программа выводит все целые числа между a и b включительно и их количество");
     int a = 0;
     int b = 0;
+    int count = 0;
 
     do
     {
@@ -16,10 +17,13 @@ int main()
 
     println("");
 
-    for (; b >= a; a++)
+    for (; b >= a; ++a)
     {
         println("{}", a);
+        ++count;
     }
+
+    println("Количество чисел: {}", count);
 
     return 0;
 }

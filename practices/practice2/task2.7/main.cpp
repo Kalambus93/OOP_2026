@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	std::println("Программа выводит строковое описание целого числа от 1 до 999");
+	std::println("Четность числа");
 
 	int number = 0;
 
