@@ -18,7 +18,7 @@ export std::vector<std::string> Normalize(const std::vector<std::string> &vector
             unsigned char uc = static_cast<unsigned char>(word[j]);
             if (std::isalpha(uc))
             {
-                clean += std::tolower(uc);
+                clean += static_cast<char>(std::tolower(uc));
             }
             else if (uc == '-' && !clean.empty() && clean.back() != '-')
             {
