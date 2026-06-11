@@ -1,17 +1,20 @@
 ﻿import std;
 
-class String {
+class String
+{
 private:
-	char* _c = nullptr;
+	char *_c = nullptr;
 	size_t _size = 0;
 
-	void allocate_memory(const char* c, size_t len) {
+	void allocate_memory(const char *c, size_t len)
+	{
 		_c = new char[len + 1];
 		std::memcpy(_c, c, len + 1);
 		_size = len;
 	}
 
-	void free_memory() {
+	void free_memory()
+	{
 		delete[] _c;
 		_c = nullptr;
 		_size = 0;
@@ -20,9 +23,11 @@ private:
 public:
 	String() = default;
 
-	String(const char* str) {
+	String(const char *str)
+	{
 
-		if (!str) {
+		if (!str)
+		{
 			throw std::invalid_argument("Переданная строка ни на что не указывает");
 		}
 
@@ -30,33 +35,42 @@ public:
 		allocate_memory(str, len);
 	}
 
-	~String() {
+	~String()
+	{
 		free_memory();
 	}
 
-	String(const String& other) {
-		if (other._c) {
+	String(const String &other)
+	{
+		if (other._c)
+		{
 			allocate_memory(other._c, other._size);
 		}
 	}
 
-	String(String&& other) noexcept : _c(other._c), _size(other._size) {
+	String(String &&other) noexcept : _c(other._c), _size(other._size)
+	{
 		other._c = nullptr;
 		other._size = 0;
 	}
 
-	String& operator=(const String& other) {
-		if (this != &other) {
+	String &operator=(const String &other)
+	{
+		if (this != &other)
+		{
 			free_memory();
-			if (other._c) {
+			if (other._c)
+			{
 				allocate_memory(other._c, other._size);
 			}
 		}
 		return *this;
 	}
 
-	String& operator=(String&& other) noexcept {
-		if (this != &other) {
+	String &operator=(String &&other) noexcept
+	{
+		if (this != &other)
+		{
 			free_memory();
 			_c = other._c;
 			_size = other._size;
@@ -66,37 +80,45 @@ public:
 		return *this;
 	}
 
-	char operator[](size_t index) const {
+	char operator[](size_t index) const
+	{
 		return _c[index];
 	}
 
-	char& operator[](size_t index) {
+	char &operator[](size_t index)
+	{
 		return _c[index];
 	}
 
-	size_t Size() {
+	size_t Size()
+	{
 		return _size;
 	}
 
-	const char* get_c() const {
+	const char *get_c() const
+	{
 		return _c;
 	}
 };
 
 template <>
-struct std::formatter<String> : std::formatter<std::string_view> {
-	auto format(const String& s, auto& ctx) const {
+struct std::formatter<String> : std::formatter<std::string_view>
+{
+	auto format(const String &s, auto &ctx) const
+	{
 		return std::formatter<std::string_view>::format(s.get_c(), ctx);
 	}
 };
 
-int main() {
-	std::println("=== Тест String ===");
+int main()
+{
+	std::println("Тест String");
 	String s1("C++");
+	std::println("Вывод: '{}', Размер: {}", s1.get_c(), s1.Size());
 	s1[0] = 'A';
-	std::println("1. Замена первого на h: '{}', Размер: {}", s1.get_c(), s1.Size());
+	std::println("Замена первого на A: '{}', Размер: {}", s1.get_c(), s1.Size());
 
 	String s2 = std::move(s1);
-	std::println("2. Перемещенный объект: '{}', Первый объект пуст? {}", s2.get_c(), s1.Size() == 0);
+	std::println("Перемещенный объект: '{}', Первый объект пуст? {}", s2.get_c(), s1.Size() == 0);
 	return 0;
 }

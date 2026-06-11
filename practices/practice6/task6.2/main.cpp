@@ -6,12 +6,12 @@ private:
 	std::string _buffer;
 
 public:
+	StringBuilder() = default;
+
 	void Reserve(size_t new_size)
 	{
 		_buffer.reserve(new_size);
 	}
-
-	StringBuilder() = default;
 
 	StringBuilder &append(const std::string &str)
 	{
@@ -52,7 +52,7 @@ int main()
 	std::println("3. Lvalue build: '{}'", res);
 	std::println("   Размер: {}", sb.build().size());
 
-	std::string temp = StringBuilder().append("Temp ").append(123).build();
+	std::string temp = StringBuilder().append("Задание номер ").append(123).build();
 	std::println("4. Rvalue build: '{}'", temp);
 
 	return 0;
