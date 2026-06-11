@@ -119,8 +119,8 @@ int main()
 	}
 	if (op == "*")
 	{
-		Fraction res_mult = fr_1 + fr_2;
-		std::println("{}+{}={}", to_string(fr_1), to_string(fr_2), to_string(res_mult));
+		Fraction res_mult = fr_1 * fr_2;
+		std::println("{}*{}={}", to_string(fr_1), to_string(fr_2), to_string(res_mult));
 	}
 
 	return 0;
