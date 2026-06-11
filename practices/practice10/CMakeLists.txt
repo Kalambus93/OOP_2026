@@ -1,6 +1,6 @@
 ﻿project("Practice10" LANGUAGES CXX)
 
-find_package(SFML COMPONENTS Graphics Audio CONFIG REQUIRED)
+find_package(SFML COMPONENTS Graphics CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME})
 
@@ -15,7 +15,6 @@ target_sources(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
-    SFML::Audio
     SFML::Graphics
 )
 
